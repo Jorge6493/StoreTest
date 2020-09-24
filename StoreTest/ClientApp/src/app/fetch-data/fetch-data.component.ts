@@ -12,6 +12,10 @@ export class FetchDataComponent {
     http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
       this.forecasts = result;
     }, error => console.error(error));
+
+    // http.get<WeatherForecast[]>(baseUrl + 'weatherforecast').subscribe(result => {
+    //   this.forecasts = result;
+    // }, error => console.error(error));
   }
 }
 
@@ -21,3 +25,10 @@ interface WeatherForecast {
   temperatureF: number;
   summary: string;
 }
+
+// interface Customer {
+//   ID: number;
+//   temperatureC: number;
+//   temperatureF: number;
+//   summary: string;
+// }
