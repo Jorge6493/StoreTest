@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StoreTest.Handler;
 using StoreTest.Models;
 
 namespace StoreTest.Controllers
@@ -12,20 +13,29 @@ namespace StoreTest.Controllers
     [Route("[controller]")]
     public class CustomersController : ControllerBase
     {
-        private readonly ApplicationDBContext _dBContext;
+        //private readonly ApplicationDBContext _DBContext;
+        private readonly ICustomersHandler _CustomersHandler;
 
-        public CustomersController(ApplicationDBContext dBContext)
+        public CustomersController(ICustomersHandler CustomersHandler)
         {
-            _dBContext = dBContext;
+            //_DBContext = DBContext;
+            _CustomersHandler = CustomersHandler;
         }
 
         public IEnumerable<Customers> Customers { get; set; }
 
         [HttpGet]
-        public async Task Get()
+        public void GetAllCustomersRequest()
         {
-            Customers = await _dBContext.Customers.ToListAsync();
+            _CustomersHandler.GetAllCustomers();
+            //Customers = await _DBContext.Customers.ToListAsync();
         }
+
+        //[HttpGet]
+        //public async Task GetCustomerByIDRequest(int ID)
+        //{
+        //    Customers = await _DBContext.Customers.ToListAsync();
+        //}
 
 
         //[HttpGet]
